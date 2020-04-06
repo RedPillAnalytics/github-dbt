@@ -25,7 +25,7 @@ clean-targets:         # directories to be removed by `dbt clean`
     - "dbt_modules"
 
 models:
-  github_edw:
+  github:
     materialized: table
     source:
       schema: source
