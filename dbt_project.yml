@@ -34,5 +34,4 @@ models:
       schema: stage
       materialized: view
     dw:
-      schema: dw
       materialized: incremental
