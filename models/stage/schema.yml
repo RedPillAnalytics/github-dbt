@@ -26,5 +26,3 @@ models:
 
     - name: license_name
       description: The license associated with the repository. Some repositories do not have licenses.
-
-    

@@ -9,6 +9,6 @@ SELECT
   license_name
 FROM
   repositories
-FULL OUTER JOIN
+LEFT JOIN
   {{ref('licenses')}}
   USING (REPOSITORY_NAME)
