@@ -1,0 +1,17 @@
+version: 2
+models:
+- name: contributors
+  description: A single table containing all authors and committers as contributors.
+
+  tests:
+    - unique:
+        column_name: "concat(contributor_name, '-', contributor_email)"
+
+  columns:
+    - name: contributor_name
+      description: The git username of a user.
+
+    - name: contributor_email
+      description: The git email address of the user.
+
+    

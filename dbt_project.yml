@@ -29,10 +29,8 @@ models:
     materialized: table
     source:
       schema: source
-      materialized: table
     stage:
       schema: stage
-      materialized: view
     dw:
       schema: dw
       materialized: incremental

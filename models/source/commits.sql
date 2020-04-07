@@ -3,10 +3,10 @@ SELECT
   tree,
   author.name author_name,
   author.email author_email,
-  author.date.seconds author_date_seconds,
+  timestamp_seconds(author.date.seconds) author_timestamp,
   committer.name committer_name,
   committer.email committer_email,
-  committer.date.seconds committer_date_seconds,
+  timestamp_seconds(committer.date.seconds) committer_timestamp,
   subject,
   message,
   repository_name
