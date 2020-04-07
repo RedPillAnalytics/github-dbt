@@ -1,4 +1,3 @@
-
 SELECT
   DISTINCT author_name contributor_name,
   author_email contributor_email
