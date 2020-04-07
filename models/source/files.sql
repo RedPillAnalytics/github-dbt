@@ -6,3 +6,7 @@ select
   mode permission_mode
 FROM
   bigquery-public-data.github_repos.files
+JOIN
+  {{ref('commits')}}
+USING
+  (repository_name)
