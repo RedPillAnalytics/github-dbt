@@ -5,7 +5,7 @@ models:
 
   tests:
     - unique:
-        column_name: "concat(contributor_name, contributor_email)"
+        column_name: "concat(contributor_name, '-', contributor_email)"
 
   columns:
     - name: contributor_name
