@@ -6,7 +6,7 @@ with repositories as (
 )
 SELECT
   REPOSITORY_NAME,
-  license license_name
+  license_name
 FROM
   repositories
 FULL OUTER JOIN
