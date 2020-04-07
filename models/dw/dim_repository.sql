@@ -5,7 +5,7 @@
 }}
 
 select
-  {{dbt_utils.surrogate_key('repository_name','license_name')}} repository_key,
+  {{dbt_utils.surrogate_key('repository_name')}} repository_key,
   repository_name,
   license_name
 from (

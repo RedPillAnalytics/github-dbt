@@ -1,0 +1,72 @@
+version: 2
+models:
+- name: dim_contributor
+  description: A dimension table containing all authors and committers as contributors.
+
+  columns:
+    - name: contributor_key
+      description: Surrogate key for the contributor dimension.
+      tests:
+        - unique
+        - not_null
+
+    - name: contributor_name
+      description: The git username of a user.
+
+    - name: contributor_email
+      description: The git email address of the user.
+
+- name: dim_repository
+  description: Dimension table with all known repositories in the dataset.
+
+  columns:
+    - name: repository_key
+      description: Surrogate key for the repository dimension.
+      tests:
+        - unique
+        - not_null
+
+    - name: repository_name
+      description: The name of the repository, in the form of 'owner/repository'.
+
+    - name: license_name
+      description: The license associated with the repository. Some repositories do not have licenses.
+
+- name: fact_commits
+  description: Fact table at the grain of an individual commit.
+
+  columns:
+    - name: contributor_key
+      description: Surrogate key for the contributor dimension.
+
+    - name: repository_key
+      description: Surrogate key for the repository dimension.
+
+    - name: commit_sha
+      description: The unique commit SHA.
+      tests:
+        - unique
+        - not_null
+
+    - name: subject
+      description: The subject of the commit.
+
+    - name: message
+      description: The message of the commit.
+
+    - name: commit_timestamp
+      description: The timestamp of the commit.    
+
+    - name: total_size
+      description: The total size in bytes of all the files in the commit.
+
+    - name: total_character_files
+      description: The total number of character files in the commit.
+
+    - name: total_binary_files
+      description: The total number of binary files in the commit.
+
+    - name: total_files
+      description: The total number of files in the commit.
+
+
