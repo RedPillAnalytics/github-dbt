@@ -605,3 +605,601 @@ There are 2 unused configuration paths:
 2020-04-06 22:05:36.266073 (Thread-53): handling status request
 2020-04-06 22:05:36.268571 (Thread-53): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c8001f2e8>]}
 2020-04-06 22:05:36.270362 (Thread-53): sending response (<Response 1452 bytes [200 OK]>) to 10.0.23.84
+2020-04-06 22:05:40.079975 (Thread-54): handling run_sql request
+2020-04-06 22:05:40.080495 (Thread-54): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c8001f7b8>]}
+2020-04-06 22:05:40.081873 (Thread-54): Connection 'model.github.commits' was properly closed.
+2020-04-06 22:05:40.087010 (Thread-54): sending response (<Response 133 bytes [200 OK]>) to 10.0.5.66
+2020-04-06 22:05:40.103480 (Thread-54): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:05:40.104004 (Thread-54): Opening a new connection, currently in state init
+2020-04-06 22:05:40.110611 (Thread-54): Found 1 model, 0 tests, 0 snapshots, 0 analyses, 141 macros, 0 operations, 0 seed files, 0 sources
+2020-04-06 22:05:40.111428 (Thread-55): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:05:40.111539 (Thread-55): Opening a new connection, currently in state init
+2020-04-06 22:05:40.111644 (Thread-55): Compiling rpc.github.request
+2020-04-06 22:05:40.126507 (Thread-55): finished collecting timing info
+2020-04-06 22:05:40.127932 (Thread-55): On rpc.github.request: /* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+SELECT
+  commit,
+  tree,
+  parent,
+  author.name author_name,
+  author.email author_email,
+  author.date.seconds author_date_seconds,
+  committer.name committer_name,
+  committer.email committer_email,
+  committer.date.seconds committer_date_seconds,
+  subject,
+  message,
+  unnest(repo_name) repo_name
+  bigquery-public-data.github_repos.commits
+limit 100
+2020-04-06 22:05:40.132852 (Thread-55): handling ps request
+2020-04-06 22:05:40.133381 (Thread-55): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c8003b9b0>]}
+2020-04-06 22:05:40.135222 (Thread-55): sending response (<Response 397 bytes [200 OK]>) to 10.0.46.192
+2020-04-06 22:05:40.324990 (Thread-56): handling poll request
+2020-04-06 22:05:40.325718 (Thread-56): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c8003b860>]}
+2020-04-06 22:05:40.328339 (Thread-56): sending response (<Response 3498 bytes [200 OK]>) to 10.0.7.248
+2020-04-06 22:05:40.394757 (Thread-55): finished collecting timing info
+2020-04-06 22:05:40.395748 (Thread-55): Got an exception: Database Error
+  Syntax error: Unexpected keyword UNNEST at [14:3]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 80, in exception_handler
+    yield
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 350, in _retry_and_handle
+    deadline=None)
+  File "/usr/local/lib/python3.6/dist-packages/google/api_core/retry.py", line 184, in retry_target
+    return target()
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 212, in fn
+    return self._query_and_results(client, sql, conn, job_params)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 339, in _query_and_results
+    iterator = query_job.result(timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/cloud/bigquery/job.py", line 3196, in result
+    super(QueryJob, self).result(retry=retry, timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/cloud/bigquery/job.py", line 818, in result
+    return super(_AsyncJob, self).result(timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/api_core/future/polling.py", line 127, in result
+    raise self._exception
+google.api_core.exceptions.BadRequest: 400 Syntax error: Unexpected keyword UNNEST at [14:3]
+
+(job ID: b8891ea9-59a7-4a4d-8a39-ec3b0ffa7238)
+
+                                                   -----Query Job SQL Follows-----                                                   
+
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+   1:/* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+   2:SELECT
+   3:  commit,
+   4:  tree,
+   5:  parent,
+   6:  author.name author_name,
+   7:  author.email author_email,
+   8:  author.date.seconds author_date_seconds,
+   9:  committer.name committer_name,
+  10:  committer.email committer_email,
+  11:  committer.date.seconds committer_date_seconds,
+  12:  subject,
+  13:  message,
+  14:  unnest(repo_name) repo_name
+  15:  bigquery-public-data.github_repos.commits
+  16:limit 100
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 223, in safe_run
+    result = self.compile_and_execute(manifest, ctx)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 166, in compile_and_execute
+    result = self.run(ctx.node, manifest)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 268, in run
+    return self.execute(compiled_node, manifest)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/rpc/node_runners.py", line 86, in execute
+    compiled_node.injected_sql, fetch=True
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/base/impl.py", line 220, in execute
+    fetch=fetch
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 221, in execute
+    query_job, iterator = self.raw_execute(sql, fetch=fetch)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 214, in raw_execute
+    query_job, iterator = self._retry_and_handle(msg=sql, conn=conn, fn=fn)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 350, in _retry_and_handle
+    deadline=None)
+  File "/usr/lib/python3.6/contextlib.py", line 99, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 84, in exception_handler
+    self.handle_error(e, message)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 72, in handle_error
+    raise DatabaseException(error_msg)
+dbt.exceptions.DatabaseException: Database Error
+  Syntax error: Unexpected keyword UNNEST at [14:3]
+2020-04-06 22:05:40.399222 (Thread-55): Got exception RPCException(10003, Database Error, {'type': 'DatabaseException', 'message': 'Database Error in rpc request (from remote system)\n  Syntax error: Unexpected keyword UNNEST at [14:3]', 'raw_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  unnest(repo_name) repo_name\n  bigquery-public-data.github_repos.commits\nlimit 100', 'compiled_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  unnest(repo_name) repo_name\n  bigquery-public-data.github_repos.commits\nlimit 100', 'tags': None}, None)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/task/rpc/sql_commands.py", line 165, in _in_thread
+    self.node_results.append(runner.safe_run(self.manifest))
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 239, in safe_run
+    result = self.error_result(ctx.node, error, started, [])
+  File "/usr/local/lib/python3.6/dist-packages/dbt/rpc/node_runners.py", line 53, in error_result
+    raise error
+dbt.rpc.error.RPCException: RPCException(10003, Database Error, {'type': 'DatabaseException', 'message': 'Database Error in rpc request (from remote system)\n  Syntax error: Unexpected keyword UNNEST at [14:3]', 'raw_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  unnest(repo_name) repo_name\n  bigquery-public-data.github_repos.commits\nlimit 100', 'compiled_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  unnest(repo_name) repo_name\n  bigquery-public-data.github_repos.commits\nlimit 100', 'tags': None}, None)
+2020-04-06 22:05:41.323597 (Thread-57): handling poll request
+2020-04-06 22:05:41.324432 (Thread-57): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c80030e48>]}
+2020-04-06 22:05:41.325751 (Thread-57): sending response (<Response 11907 bytes [200 OK]>) to 10.0.27.197
+2020-04-06 22:05:41.714270 (Thread-58): Got an acceptable cached parse result
+2020-04-06 22:05:42.031020 (Thread-58): WARNING: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 2 unused configuration paths:
+- models.github.dw
+- models.github.stage
+
+2020-04-06 22:05:42.062752 (Thread-59): handling status request
+2020-04-06 22:05:42.071151 (Thread-59): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73eccdd8>]}
+2020-04-06 22:05:42.072509 (Thread-59): sending response (<Response 882 bytes [200 OK]>) to 10.0.23.84
+2020-04-06 22:05:53.963905 (Thread-60): handling run_sql request
+2020-04-06 22:05:53.966334 (Thread-60): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73eccdd8>]}
+2020-04-06 22:05:53.974604 (Thread-60): sending response (<Response 133 bytes [200 OK]>) to 10.0.23.84
+2020-04-06 22:05:53.983252 (Thread-61): handling ps request
+2020-04-06 22:05:53.984067 (Thread-61): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73df3c50>]}
+2020-04-06 22:05:53.986888 (Thread-61): sending response (<Response 398 bytes [200 OK]>) to 10.0.46.192
+2020-04-06 22:05:53.991680 (Thread-60): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:05:53.992234 (Thread-60): Opening a new connection, currently in state init
+2020-04-06 22:05:53.999964 (Thread-60): Found 1 model, 0 tests, 0 snapshots, 0 analyses, 141 macros, 0 operations, 0 seed files, 0 sources
+2020-04-06 22:05:54.001072 (Thread-61): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:05:54.001230 (Thread-61): Opening a new connection, currently in state init
+2020-04-06 22:05:54.001834 (Thread-61): Compiling rpc.github.request
+2020-04-06 22:05:54.018256 (Thread-61): finished collecting timing info
+2020-04-06 22:05:54.019860 (Thread-61): On rpc.github.request: /* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+SELECT
+  commit,
+  tree,
+  parent,
+  author.name author_name,
+  author.email author_email,
+  author.date.seconds author_date_seconds,
+  committer.name committer_name,
+  committer.email committer_email,
+  committer.date.seconds committer_date_seconds,
+  subject,
+  message,
+  repo_name
+  bigquery-public-data.github_repos.commits
+limit 100
+2020-04-06 22:05:54.166619 (Thread-62): handling poll request
+2020-04-06 22:05:54.167120 (Thread-62): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73df3c50>]}
+2020-04-06 22:05:54.169853 (Thread-62): sending response (<Response 3483 bytes [200 OK]>) to 10.0.41.194
+2020-04-06 22:05:54.291567 (Thread-61): finished collecting timing info
+2020-04-06 22:05:54.292210 (Thread-61): Got an exception: Database Error
+  Syntax error: Unexpected "-" at [15:11]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 80, in exception_handler
+    yield
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 350, in _retry_and_handle
+    deadline=None)
+  File "/usr/local/lib/python3.6/dist-packages/google/api_core/retry.py", line 184, in retry_target
+    return target()
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 212, in fn
+    return self._query_and_results(client, sql, conn, job_params)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 339, in _query_and_results
+    iterator = query_job.result(timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/cloud/bigquery/job.py", line 3196, in result
+    super(QueryJob, self).result(retry=retry, timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/cloud/bigquery/job.py", line 818, in result
+    return super(_AsyncJob, self).result(timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/api_core/future/polling.py", line 127, in result
+    raise self._exception
+google.api_core.exceptions.BadRequest: 400 Syntax error: Unexpected "-" at [15:11]
+
+(job ID: 4923a3cd-700f-4777-b51a-000cd0d814bf)
+
+                                                   -----Query Job SQL Follows-----                                                   
+
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+   1:/* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+   2:SELECT
+   3:  commit,
+   4:  tree,
+   5:  parent,
+   6:  author.name author_name,
+   7:  author.email author_email,
+   8:  author.date.seconds author_date_seconds,
+   9:  committer.name committer_name,
+  10:  committer.email committer_email,
+  11:  committer.date.seconds committer_date_seconds,
+  12:  subject,
+  13:  message,
+  14:  repo_name
+  15:  bigquery-public-data.github_repos.commits
+  16:limit 100
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 223, in safe_run
+    result = self.compile_and_execute(manifest, ctx)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 166, in compile_and_execute
+    result = self.run(ctx.node, manifest)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 268, in run
+    return self.execute(compiled_node, manifest)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/rpc/node_runners.py", line 86, in execute
+    compiled_node.injected_sql, fetch=True
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/base/impl.py", line 220, in execute
+    fetch=fetch
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 221, in execute
+    query_job, iterator = self.raw_execute(sql, fetch=fetch)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 214, in raw_execute
+    query_job, iterator = self._retry_and_handle(msg=sql, conn=conn, fn=fn)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 350, in _retry_and_handle
+    deadline=None)
+  File "/usr/lib/python3.6/contextlib.py", line 99, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 84, in exception_handler
+    self.handle_error(e, message)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 72, in handle_error
+    raise DatabaseException(error_msg)
+dbt.exceptions.DatabaseException: Database Error
+  Syntax error: Unexpected "-" at [15:11]
+2020-04-06 22:05:54.294822 (Thread-61): Got exception RPCException(10003, Database Error, {'type': 'DatabaseException', 'message': 'Database Error in rpc request (from remote system)\n  Syntax error: Unexpected "-" at [15:11]', 'raw_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name\n  bigquery-public-data.github_repos.commits\nlimit 100', 'compiled_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name\n  bigquery-public-data.github_repos.commits\nlimit 100', 'tags': None}, None)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/task/rpc/sql_commands.py", line 165, in _in_thread
+    self.node_results.append(runner.safe_run(self.manifest))
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 239, in safe_run
+    result = self.error_result(ctx.node, error, started, [])
+  File "/usr/local/lib/python3.6/dist-packages/dbt/rpc/node_runners.py", line 53, in error_result
+    raise error
+dbt.rpc.error.RPCException: RPCException(10003, Database Error, {'type': 'DatabaseException', 'message': 'Database Error in rpc request (from remote system)\n  Syntax error: Unexpected "-" at [15:11]', 'raw_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name\n  bigquery-public-data.github_repos.commits\nlimit 100', 'compiled_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name\n  bigquery-public-data.github_repos.commits\nlimit 100', 'tags': None}, None)
+2020-04-06 22:05:54.849529 (Thread-63): handling poll request
+2020-04-06 22:05:54.850047 (Thread-63): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73ecca58>]}
+2020-04-06 22:05:54.851056 (Thread-63): sending response (<Response 11718 bytes [200 OK]>) to 10.0.27.197
+2020-04-06 22:06:11.663380 (Thread-64): handling run_sql request
+2020-04-06 22:06:11.665769 (Thread-64): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73ef3a20>]}
+2020-04-06 22:06:11.672423 (Thread-64): sending response (<Response 133 bytes [200 OK]>) to 10.0.29.175
+2020-04-06 22:06:11.688013 (Thread-64): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:06:11.696765 (Thread-65): handling ps request
+2020-04-06 22:06:11.688549 (Thread-64): Opening a new connection, currently in state init
+2020-04-06 22:06:11.697690 (Thread-65): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73ef3a20>]}
+2020-04-06 22:06:11.695523 (Thread-64): Found 1 model, 0 tests, 0 snapshots, 0 analyses, 141 macros, 0 operations, 0 seed files, 0 sources
+2020-04-06 22:06:11.696584 (Thread-65): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:06:11.696736 (Thread-65): Opening a new connection, currently in state init
+2020-04-06 22:06:11.696887 (Thread-65): Compiling rpc.github.request
+2020-04-06 22:06:11.713355 (Thread-65): finished collecting timing info
+2020-04-06 22:06:11.714844 (Thread-65): On rpc.github.request: /* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+SELECT
+  commit,
+  tree,
+  parent,
+  author.name author_name,
+  author.email author_email,
+  author.date.seconds author_date_seconds,
+  committer.name committer_name,
+  committer.email committer_email,
+  committer.date.seconds committer_date_seconds,
+  subject,
+  message,
+  repo_name
+from bigquery-public-data.github_repos.commits
+limit 100
+2020-04-06 22:06:11.729546 (Thread-65): sending response (<Response 399 bytes [200 OK]>) to 10.0.46.192
+2020-04-06 22:06:11.855460 (Thread-66): handling poll request
+2020-04-06 22:06:11.855952 (Thread-66): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73f39cf8>]}
+2020-04-06 22:06:11.857827 (Thread-66): sending response (<Response 3489 bytes [200 OK]>) to 10.0.29.175
+2020-04-06 22:06:12.569804 (Thread-67): handling poll request
+2020-04-06 22:06:12.570420 (Thread-67): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73dc36a0>]}
+2020-04-06 22:06:12.572264 (Thread-67): sending response (<Response 3489 bytes [200 OK]>) to 10.0.46.192
+2020-04-06 22:06:13.046824 (Thread-65): finished collecting timing info
+2020-04-06 22:06:13.218148 (Thread-68): handling poll request
+2020-04-06 22:06:13.218664 (Thread-68): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73f396a0>]}
+2020-04-06 22:06:13.224649 (Thread-68): sending response (<Response 58844 bytes [200 OK]>) to 10.0.7.248
+2020-04-06 22:06:30.056827 (Thread-69): handling ps request
+2020-04-06 22:06:30.059259 (Thread-69): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73f396a0>]}
+2020-04-06 22:06:30.060144 (Thread-69): sending response (<Response 100 bytes [200 OK]>) to 10.0.23.84
+2020-04-06 22:06:30.072156 (Thread-70): handling run_sql request
+2020-04-06 22:06:30.072530 (Thread-70): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73f393c8>]}
+2020-04-06 22:06:30.079028 (Thread-70): sending response (<Response 133 bytes [200 OK]>) to 10.0.29.175
+2020-04-06 22:06:30.094705 (Thread-70): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:06:30.095236 (Thread-70): Opening a new connection, currently in state init
+2020-04-06 22:06:30.102454 (Thread-70): Found 1 model, 0 tests, 0 snapshots, 0 analyses, 141 macros, 0 operations, 0 seed files, 0 sources
+2020-04-06 22:06:30.103410 (Thread-71): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:06:30.103522 (Thread-71): Opening a new connection, currently in state init
+2020-04-06 22:06:30.103621 (Thread-71): Compiling rpc.github.request
+2020-04-06 22:06:30.116856 (Thread-71): finished collecting timing info
+2020-04-06 22:06:30.118455 (Thread-71): On rpc.github.request: /* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+SELECT
+  commit,
+  tree,
+  parent,
+  author.name author_name,
+  author.email author_email,
+  author.date.seconds author_date_seconds,
+  committer.name committer_name,
+  committer.email committer_email,
+  committer.date.seconds committer_date_seconds,
+  subject,
+  message,
+  repo_name,
+  unnest(repo_name)
+from bigquery-public-data.github_repos.commits
+limit 100
+2020-04-06 22:06:30.278015 (Thread-71): handling poll request
+2020-04-06 22:06:30.278680 (Thread-71): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73f393c8>]}
+2020-04-06 22:06:30.281162 (Thread-71): sending response (<Response 3510 bytes [200 OK]>) to 10.0.29.175
+2020-04-06 22:06:30.345824 (Thread-71): finished collecting timing info
+2020-04-06 22:06:30.346504 (Thread-71): Got an exception: Database Error
+  Syntax error: Unexpected keyword UNNEST at [15:3]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 80, in exception_handler
+    yield
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 350, in _retry_and_handle
+    deadline=None)
+  File "/usr/local/lib/python3.6/dist-packages/google/api_core/retry.py", line 184, in retry_target
+    return target()
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 212, in fn
+    return self._query_and_results(client, sql, conn, job_params)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 339, in _query_and_results
+    iterator = query_job.result(timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/cloud/bigquery/job.py", line 3196, in result
+    super(QueryJob, self).result(retry=retry, timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/cloud/bigquery/job.py", line 818, in result
+    return super(_AsyncJob, self).result(timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/api_core/future/polling.py", line 127, in result
+    raise self._exception
+google.api_core.exceptions.BadRequest: 400 Syntax error: Unexpected keyword UNNEST at [15:3]
+
+(job ID: 182d4542-cdb2-4272-85da-0068353810b0)
+
+                                                   -----Query Job SQL Follows-----                                                   
+
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+   1:/* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+   2:SELECT
+   3:  commit,
+   4:  tree,
+   5:  parent,
+   6:  author.name author_name,
+   7:  author.email author_email,
+   8:  author.date.seconds author_date_seconds,
+   9:  committer.name committer_name,
+  10:  committer.email committer_email,
+  11:  committer.date.seconds committer_date_seconds,
+  12:  subject,
+  13:  message,
+  14:  repo_name,
+  15:  unnest(repo_name)
+  16:from bigquery-public-data.github_repos.commits
+  17:limit 100
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 223, in safe_run
+    result = self.compile_and_execute(manifest, ctx)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 166, in compile_and_execute
+    result = self.run(ctx.node, manifest)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 268, in run
+    return self.execute(compiled_node, manifest)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/rpc/node_runners.py", line 86, in execute
+    compiled_node.injected_sql, fetch=True
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/base/impl.py", line 220, in execute
+    fetch=fetch
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 221, in execute
+    query_job, iterator = self.raw_execute(sql, fetch=fetch)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 214, in raw_execute
+    query_job, iterator = self._retry_and_handle(msg=sql, conn=conn, fn=fn)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 350, in _retry_and_handle
+    deadline=None)
+  File "/usr/lib/python3.6/contextlib.py", line 99, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 84, in exception_handler
+    self.handle_error(e, message)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 72, in handle_error
+    raise DatabaseException(error_msg)
+dbt.exceptions.DatabaseException: Database Error
+  Syntax error: Unexpected keyword UNNEST at [15:3]
+2020-04-06 22:06:30.348753 (Thread-71): Got exception RPCException(10003, Database Error, {'type': 'DatabaseException', 'message': 'Database Error in rpc request (from remote system)\n  Syntax error: Unexpected keyword UNNEST at [15:3]', 'raw_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name,\n  unnest(repo_name)\nfrom bigquery-public-data.github_repos.commits\nlimit 100', 'compiled_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name,\n  unnest(repo_name)\nfrom bigquery-public-data.github_repos.commits\nlimit 100', 'tags': None}, None)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/task/rpc/sql_commands.py", line 165, in _in_thread
+    self.node_results.append(runner.safe_run(self.manifest))
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 239, in safe_run
+    result = self.error_result(ctx.node, error, started, [])
+  File "/usr/local/lib/python3.6/dist-packages/dbt/rpc/node_runners.py", line 53, in error_result
+    raise error
+dbt.rpc.error.RPCException: RPCException(10003, Database Error, {'type': 'DatabaseException', 'message': 'Database Error in rpc request (from remote system)\n  Syntax error: Unexpected keyword UNNEST at [15:3]', 'raw_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name,\n  unnest(repo_name)\nfrom bigquery-public-data.github_repos.commits\nlimit 100', 'compiled_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name,\n  unnest(repo_name)\nfrom bigquery-public-data.github_repos.commits\nlimit 100', 'tags': None}, None)
+2020-04-06 22:06:30.940596 (Thread-72): handling poll request
+2020-04-06 22:06:30.941090 (Thread-72): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73ef9be0>]}
+2020-04-06 22:06:30.941987 (Thread-72): sending response (<Response 11978 bytes [200 OK]>) to 10.0.13.188
+2020-04-06 22:06:41.978262 (Thread-73): handling ps request
+2020-04-06 22:06:41.979262 (Thread-74): handling run_sql request
+2020-04-06 22:06:41.980973 (Thread-73): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e320b8>]}
+2020-04-06 22:06:41.981433 (Thread-74): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e27c50>]}
+2020-04-06 22:06:41.982549 (Thread-73): sending response (<Response 100 bytes [200 OK]>) to 10.0.5.66
+2020-04-06 22:06:41.990548 (Thread-74): sending response (<Response 133 bytes [200 OK]>) to 10.0.29.175
+2020-04-06 22:06:42.005660 (Thread-74): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:06:42.006203 (Thread-74): Opening a new connection, currently in state init
+2020-04-06 22:06:42.012983 (Thread-74): Found 1 model, 0 tests, 0 snapshots, 0 analyses, 141 macros, 0 operations, 0 seed files, 0 sources
+2020-04-06 22:06:42.013821 (Thread-75): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:06:42.014059 (Thread-75): Opening a new connection, currently in state init
+2020-04-06 22:06:42.014204 (Thread-75): Compiling rpc.github.request
+2020-04-06 22:06:42.027476 (Thread-75): finished collecting timing info
+2020-04-06 22:06:42.029100 (Thread-75): On rpc.github.request: /* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+SELECT
+  commit,
+  tree,
+  parent,
+  author.name author_name,
+  author.email author_email,
+  author.date.seconds author_date_seconds,
+  committer.name committer_name,
+  committer.email committer_email,
+  committer.date.seconds committer_date_seconds,
+  subject,
+  message,
+  repo_name,
+  flatten(repo_name)
+from bigquery-public-data.github_repos.commits
+limit 100
+2020-04-06 22:06:42.199673 (Thread-75): handling poll request
+2020-04-06 22:06:42.200233 (Thread-75): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e27c50>]}
+2020-04-06 22:06:42.202775 (Thread-75): sending response (<Response 3512 bytes [200 OK]>) to 10.0.46.192
+2020-04-06 22:06:42.453596 (Thread-75): finished collecting timing info
+2020-04-06 22:06:42.454300 (Thread-75): Got an exception: Database Error
+  Function not found: flatten at [15:3]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 80, in exception_handler
+    yield
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 350, in _retry_and_handle
+    deadline=None)
+  File "/usr/local/lib/python3.6/dist-packages/google/api_core/retry.py", line 184, in retry_target
+    return target()
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 212, in fn
+    return self._query_and_results(client, sql, conn, job_params)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 339, in _query_and_results
+    iterator = query_job.result(timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/cloud/bigquery/job.py", line 3196, in result
+    super(QueryJob, self).result(retry=retry, timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/cloud/bigquery/job.py", line 818, in result
+    return super(_AsyncJob, self).result(timeout=timeout)
+  File "/usr/local/lib/python3.6/dist-packages/google/api_core/future/polling.py", line 127, in result
+    raise self._exception
+google.api_core.exceptions.BadRequest: 400 Function not found: flatten at [15:3]
+
+(job ID: 5c63bea8-2951-4bcf-bb88-18fc8d25e14f)
+
+                                                   -----Query Job SQL Follows-----                                                   
+
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+   1:/* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+   2:SELECT
+   3:  commit,
+   4:  tree,
+   5:  parent,
+   6:  author.name author_name,
+   7:  author.email author_email,
+   8:  author.date.seconds author_date_seconds,
+   9:  committer.name committer_name,
+  10:  committer.email committer_email,
+  11:  committer.date.seconds committer_date_seconds,
+  12:  subject,
+  13:  message,
+  14:  repo_name,
+  15:  flatten(repo_name)
+  16:from bigquery-public-data.github_repos.commits
+  17:limit 100
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 223, in safe_run
+    result = self.compile_and_execute(manifest, ctx)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 166, in compile_and_execute
+    result = self.run(ctx.node, manifest)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 268, in run
+    return self.execute(compiled_node, manifest)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/rpc/node_runners.py", line 86, in execute
+    compiled_node.injected_sql, fetch=True
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/base/impl.py", line 220, in execute
+    fetch=fetch
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 221, in execute
+    query_job, iterator = self.raw_execute(sql, fetch=fetch)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 214, in raw_execute
+    query_job, iterator = self._retry_and_handle(msg=sql, conn=conn, fn=fn)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 350, in _retry_and_handle
+    deadline=None)
+  File "/usr/lib/python3.6/contextlib.py", line 99, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 84, in exception_handler
+    self.handle_error(e, message)
+  File "/usr/local/lib/python3.6/dist-packages/dbt/adapters/bigquery/connections.py", line 72, in handle_error
+    raise DatabaseException(error_msg)
+dbt.exceptions.DatabaseException: Database Error
+  Function not found: flatten at [15:3]
+2020-04-06 22:06:42.457388 (Thread-75): Got exception RPCException(10003, Database Error, {'type': 'DatabaseException', 'message': 'Database Error in rpc request (from remote system)\n  Function not found: flatten at [15:3]', 'raw_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name,\n  flatten(repo_name)\nfrom bigquery-public-data.github_repos.commits\nlimit 100', 'compiled_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name,\n  flatten(repo_name)\nfrom bigquery-public-data.github_repos.commits\nlimit 100', 'tags': None}, None)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/dbt/task/rpc/sql_commands.py", line 165, in _in_thread
+    self.node_results.append(runner.safe_run(self.manifest))
+  File "/usr/local/lib/python3.6/dist-packages/dbt/node_runners.py", line 239, in safe_run
+    result = self.error_result(ctx.node, error, started, [])
+  File "/usr/local/lib/python3.6/dist-packages/dbt/rpc/node_runners.py", line 53, in error_result
+    raise error
+dbt.rpc.error.RPCException: RPCException(10003, Database Error, {'type': 'DatabaseException', 'message': 'Database Error in rpc request (from remote system)\n  Function not found: flatten at [15:3]', 'raw_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name,\n  flatten(repo_name)\nfrom bigquery-public-data.github_repos.commits\nlimit 100', 'compiled_sql': 'SELECT\n  commit,\n  tree,\n  parent,\n  author.name author_name,\n  author.email author_email,\n  author.date.seconds author_date_seconds,\n  committer.name committer_name,\n  committer.email committer_email,\n  committer.date.seconds committer_date_seconds,\n  subject,\n  message,\n  repo_name,\n  flatten(repo_name)\nfrom bigquery-public-data.github_repos.commits\nlimit 100', 'tags': None}, None)
+2020-04-06 22:06:42.889945 (Thread-76): handling poll request
+2020-04-06 22:06:42.890899 (Thread-76): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73ef9be0>]}
+2020-04-06 22:06:42.891869 (Thread-76): sending response (<Response 11914 bytes [200 OK]>) to 10.0.39.229
+2020-04-06 22:06:49.089793 (Thread-77): handling run_sql request
+2020-04-06 22:06:49.092193 (Thread-77): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73f39198>]}
+2020-04-06 22:06:49.099463 (Thread-77): sending response (<Response 133 bytes [200 OK]>) to 10.0.9.254
+2020-04-06 22:06:49.102137 (Thread-78): handling ps request
+2020-04-06 22:06:49.115240 (Thread-78): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e317b8>]}
+2020-04-06 22:06:49.117525 (Thread-78): sending response (<Response 398 bytes [200 OK]>) to 10.0.5.66
+2020-04-06 22:06:49.118987 (Thread-77): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:06:49.126270 (Thread-77): Opening a new connection, currently in state init
+2020-04-06 22:06:49.146216 (Thread-77): Found 1 model, 0 tests, 0 snapshots, 0 analyses, 141 macros, 0 operations, 0 seed files, 0 sources
+2020-04-06 22:06:49.147502 (Thread-78): Acquiring new bigquery connection "rpc.github.request".
+2020-04-06 22:06:49.147662 (Thread-78): Opening a new connection, currently in state init
+2020-04-06 22:06:49.147855 (Thread-78): Compiling rpc.github.request
+2020-04-06 22:06:49.169321 (Thread-78): finished collecting timing info
+2020-04-06 22:06:49.170762 (Thread-78): On rpc.github.request: /* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+SELECT
+  commit,
+  tree,
+  parent,
+  author.name author_name,
+  author.email author_email,
+  author.date.seconds author_date_seconds,
+  committer.name committer_name,
+  committer.email committer_email,
+  committer.date.seconds committer_date_seconds,
+  subject,
+  message,
+  repo_name
+from bigquery-public-data.github_repos.commits
+limit 100
+2020-04-06 22:06:49.302849 (Thread-79): handling poll request
+2020-04-06 22:06:49.303368 (Thread-79): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e32278>]}
+2020-04-06 22:06:49.305300 (Thread-79): sending response (<Response 3486 bytes [200 OK]>) to 10.0.41.194
+2020-04-06 22:06:50.002970 (Thread-80): handling poll request
+2020-04-06 22:06:50.003481 (Thread-80): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e2b6a0>]}
+2020-04-06 22:06:50.005299 (Thread-80): sending response (<Response 3486 bytes [200 OK]>) to 10.0.9.254
+2020-04-06 22:06:50.433249 (Thread-78): finished collecting timing info
+2020-04-06 22:06:50.690545 (Thread-81): handling poll request
+2020-04-06 22:06:50.691034 (Thread-81): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e2b198>]}
+2020-04-06 22:06:50.696449 (Thread-81): sending response (<Response 58841 bytes [200 OK]>) to 10.0.29.175
+2020-04-07 00:39:37.707722 (Thread-82): handling run_sql request
+2020-04-07 00:39:37.719744 (Thread-83): handling ps request
+2020-04-07 00:39:37.732363 (Thread-82): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c8003bc88>]}
+2020-04-07 00:39:37.732840 (Thread-83): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e2bc50>]}
+2020-04-07 00:39:37.735160 (Thread-83): sending response (<Response 404 bytes [200 OK]>) to 10.0.29.175
+2020-04-07 00:39:37.742990 (Thread-82): sending response (<Response 133 bytes [200 OK]>) to 10.0.41.194
+2020-04-07 00:39:37.758003 (Thread-82): Acquiring new bigquery connection "rpc.github.request".
+2020-04-07 00:39:37.758564 (Thread-82): Opening a new connection, currently in state init
+2020-04-07 00:39:37.770047 (Thread-82): Found 1 model, 0 tests, 0 snapshots, 0 analyses, 141 macros, 0 operations, 0 seed files, 0 sources
+2020-04-07 00:39:37.770999 (Thread-84): Acquiring new bigquery connection "rpc.github.request".
+2020-04-07 00:39:37.771108 (Thread-84): Opening a new connection, currently in state init
+2020-04-07 00:39:37.771246 (Thread-84): Compiling rpc.github.request
+2020-04-07 00:39:37.784549 (Thread-84): finished collecting timing info
+2020-04-07 00:39:37.785956 (Thread-84): On rpc.github.request: /* {"app": "dbt", "dbt_version": "0.16.0", "profile_name": "user", "target_name": "default", "node_id": "rpc.github.request"} */
+SELECT
+  commit,
+  tree,
+  parent,
+  author.name author_name,
+  author.email author_email,
+  author.date.seconds author_date_seconds,
+  committer.name committer_name,
+  committer.email committer_email,
+  committer.date.seconds committer_date_seconds,
+  subject,
+  message,
+  repo_name
+from bigquery-public-data.github_repos.commits
+limit 100
+2020-04-07 00:39:37.920266 (Thread-84): handling poll request
+2020-04-07 00:39:37.920822 (Thread-84): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e2bfd0>]}
+2020-04-07 00:39:37.923350 (Thread-84): sending response (<Response 3489 bytes [200 OK]>) to 10.0.23.84
+2020-04-07 00:39:38.573707 (Thread-85): handling poll request
+2020-04-07 00:39:38.574268 (Thread-85): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73df32e8>]}
+2020-04-07 00:39:38.576084 (Thread-85): sending response (<Response 3488 bytes [200 OK]>) to 10.0.13.188
+2020-04-07 00:39:39.019890 (Thread-84): finished collecting timing info
+2020-04-07 00:39:39.272637 (Thread-86): handling poll request
+2020-04-07 00:39:39.273141 (Thread-86): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73fe8f28>]}
+2020-04-07 00:39:39.278641 (Thread-86): sending response (<Response 58844 bytes [200 OK]>) to 10.0.46.192
+2020-04-07 00:39:58.778152 (Thread-87): handling status request
+2020-04-07 00:39:58.780224 (Thread-87): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e87dd8>]}
+2020-04-07 00:39:58.781248 (Thread-87): sending response (<Response 882 bytes [200 OK]>) to 10.0.41.194
