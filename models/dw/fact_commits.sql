@@ -1,7 +1,6 @@
 {{
     config(
         unique_key='commit_sha',
-        partition_by='date(commit_timestamp)'
     )
 }}
 
