@@ -9,7 +9,11 @@ with files as (
     bigquery-public-data.github_repos.files
 )
 select
-  *
+    file_id,
+    repository_name,
+    reference,
+    path,
+    permission_mode
 from files
 JOIN
   {{ref('commits')}}
