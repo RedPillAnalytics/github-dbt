@@ -1,7 +1,6 @@
 SELECT
   commit,
   tree,
-  parent,
   author.name author_name,
   author.email author_email,
   author.date.seconds author_date_seconds,
