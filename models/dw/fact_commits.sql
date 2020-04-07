@@ -1,10 +1,6 @@
 {{
     config(
-        unique_key='commit_sha',
-        partition_by={
-            "field": "commit_timestamp",
-            "data_type": "timestamp"
-    }
+        unique_key='commit_sha'
     )
 }}
 
