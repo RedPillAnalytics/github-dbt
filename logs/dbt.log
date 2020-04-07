@@ -1203,3 +1203,32 @@ limit 100
 2020-04-07 00:39:58.778152 (Thread-87): handling status request
 2020-04-07 00:39:58.780224 (Thread-87): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e87dd8>]}
 2020-04-07 00:39:58.781248 (Thread-87): sending response (<Response 882 bytes [200 OK]>) to 10.0.41.194
+2020-04-07 00:40:03.972795 (Thread-88): Got an acceptable cached parse result
+2020-04-07 00:40:04.132683 (Thread-89): handling status request
+2020-04-07 00:40:04.134282 (Thread-89): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73d93400>]}
+2020-04-07 00:40:04.135104 (Thread-89): sending response (<Response 182 bytes [200 OK]>) to 10.0.9.254
+2020-04-07 00:40:04.340323 (Thread-88): WARNING: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 2 unused configuration paths:
+- models.github.dw
+- models.github.stage
+
+2020-04-07 00:40:05.328982 (Thread-90): handling status request
+2020-04-07 00:40:05.329525 (Thread-90): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73ed8e80>]}
+2020-04-07 00:40:05.330612 (Thread-90): sending response (<Response 882 bytes [200 OK]>) to 10.0.41.194
+2020-04-07 00:42:15.901956 (Thread-91): Got an acceptable cached parse result
+2020-04-07 00:42:15.948711 (Thread-91): Acquiring new bigquery connection "model.github.commits".
+2020-04-07 00:42:15.948888 (Thread-91): Opening a new connection, currently in state init
+2020-04-07 00:42:16.068002 (Thread-92): handling status request
+2020-04-07 00:42:16.071957 (Thread-92): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c73e12a20>]}
+2020-04-07 00:42:16.073031 (Thread-92): sending response (<Response 182 bytes [200 OK]>) to 10.0.13.188
+2020-04-07 00:42:16.265841 (Thread-91): WARNING: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 2 unused configuration paths:
+- models.github.dw
+- models.github.stage
+
+2020-04-07 00:42:17.238628 (Thread-93): handling status request
+2020-04-07 00:42:17.239230 (Thread-93): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c812c5ac8>]}
+2020-04-07 00:42:17.240593 (Thread-93): sending response (<Response 1452 bytes [200 OK]>) to 10.0.5.66
+2020-04-07 00:42:25.859427 (Thread-94): handling status request
+2020-04-07 00:42:25.861789 (Thread-94): Sending event: {'category': 'dbt', 'action': 'rpc_request', 'label': 'a1151651-bcba-411f-9e5a-8f0bf6b69223', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f3c812c5780>]}
+2020-04-07 00:42:25.863012 (Thread-94): sending response (<Response 1452 bytes [200 OK]>) to 10.0.41.194
