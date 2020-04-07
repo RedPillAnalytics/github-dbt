@@ -14,4 +14,17 @@ models:
     - name: contributor_email
       description: The git email address of the user.
 
+- name: repositories
+  description: All the repositories known in the dataset.
+
+  columns:
+    - name: repository_name
+      description: The name of the repository, in the form of 'owner/repository'.
+      tests:
+        - unique
+        - not_null
+
+    - name: license_name
+      description: The license associated with the repository. Some repositories do not have licenses.
+
     
