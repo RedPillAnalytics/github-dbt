@@ -1,6 +1,10 @@
 {{
     config(
         unique_key='commit_sha',
+        partition_by={
+            "field": "commit_timestamp",
+            "data_type": "timestamp"
+    }
     )
 }}
 
@@ -19,13 +23,9 @@ with detail as (
     FROM
         {{ref('commits')}}
     JOIN
-        {{ref('files')}}
+        {{ref('file_contents')}}
     USING
         (repository_name)
-    JOIN
-        {{ref('contents')}}
-    USING
-        (file_id)
 )
 select
     contributor_key,

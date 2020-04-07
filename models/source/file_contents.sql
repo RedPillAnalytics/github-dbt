@@ -2,8 +2,7 @@ with contents as (
   SELECT
     id file_id,
     size,
-    -- REMOVED content column because it slows everything down
-    --content,
+    content,
     CASE BINARY
       WHEN TRUE THEN 'Binary'
     ELSE
@@ -14,7 +13,8 @@ with contents as (
     bigquery-public-data.github_repos.contents
 )
 SELECT
-  *
+  -- removing content because it slows down demo
+  * except(content)
 FROM
   contents
 JOIN
