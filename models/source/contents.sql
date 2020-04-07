@@ -2,7 +2,8 @@ with contents as (
   SELECT
     id file_id,
     size,
-    content,
+    -- REMOVED content column because it slows everything down
+    --content,
     CASE BINARY
       WHEN TRUE THEN 'Binary'
     ELSE
