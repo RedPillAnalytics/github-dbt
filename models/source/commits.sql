@@ -10,5 +10,7 @@ SELECT
   committer.date.seconds committer_date_seconds,
   subject,
   message,
-  repo_name
-from bigquery-public-data.github_repos.commits
+  repository_name
+FROM
+  bigquery-public-data.github_repos.commits,
+  UNNEST(repo_name) AS repository_name
