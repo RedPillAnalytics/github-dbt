@@ -42,11 +42,14 @@ models:
     - name: repository_key
       description: Surrogate key for the repository dimension.
 
-    - name: commit_sha
-      description: The unique commit SHA.
+    - name: commit_key
+      description: Surrogate key to define uniqueness for the grain of the fact table.
       tests:
         - unique
         - not_null
+
+    - name: commit_sha
+      description: The unique commit SHA.
 
     - name: subject
       description: The subject of the commit.
