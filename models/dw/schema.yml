@@ -5,7 +5,7 @@ models:
 
   columns:
     - name: contributor_key
-      description: Surrogate key for the contributor dimension dude..
+      description: Surrogate key for the contributor dimension dudes.
       tests:
         - unique
         - not_null
